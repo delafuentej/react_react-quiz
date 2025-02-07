@@ -37,9 +37,10 @@ body {
 }
 
 .main {
-  width: 50rem;
+  width: 100%;
+  max-width: 50rem;
+  padding: 1rem;
 }
-
 .app-header {
   width: 66rem;
   margin-bottom: 4rem;
@@ -70,7 +71,8 @@ body {
 }
 
 img {
-  width: 14rem;
+  width: 100%;
+  max-width: 14rem;
 }
 @keyframes glow {
   0% {
@@ -106,6 +108,10 @@ h4 {
   margin-bottom: 2.4rem;
 }
 
+h1, h2, h3, h4 {
+  word-wrap: break-word;
+  text-align: center;
+}
 .start {
   display: flex;
   flex-direction: column;
@@ -154,6 +160,8 @@ progress {
   cursor: pointer;
   border-radius: 100px;
   transition: 0.3s;
+  width: auto;
+  max-width: 90%;
 }
 
 .btn:not([disabled]):hover {
@@ -335,5 +343,43 @@ progress {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+
+/* media queries */
+@media (max-width: 768px) {
+  .app-header {
+    width: 90%;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main {
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  .btn {
+    font-size: 1.8rem;
+    padding: 1rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .btn {
+    font-size: 1.6rem;
+    padding: 0.8rem 1.6rem;
   }
 }
