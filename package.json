@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "cra-template": "1.2.0",
-    "json-server": "^1.0.0-beta.3",
+    "json-server": "^0.17.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1"
@@ -14,7 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch data/data.json -p 9000"
+    "server": "json-server --watch src/api/data.json --port 4009"
   },
   "eslintConfig": {
     "extends": [
