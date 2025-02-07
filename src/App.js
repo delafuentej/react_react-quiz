@@ -10,12 +10,18 @@ import ProgressBar from './components/ProgressBar';
 import FinalScreen from './components/FinalScreen';
 import { Timer } from './components/Timer';
 
-const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+import db from './api/data.json';
+
+const {questions} = db;
+
+
+
+//const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 
 const SECONDS_PER_QUESTION = 30;
 
-console.log('apiEndpoint', apiEndpoint)
+//console.log('apiEndpoint', apiEndpoint)
 
 const initialState = {
   questions: [],
@@ -27,16 +33,17 @@ const initialState = {
   highscore: 0,
   secondsRemaining: null,
 };
-console.log('initialState', initialState)
+//console.log('initialState', initialState)
 
 function reducer(state, action){
-  console.log('state', state, 'action', action);
+ // console.log('state', state, 'action', action);
 
   switch(action.type){
     case 'dataReceived':
       return {
         ...state,
-        questions: action.payload.sort(() => Math.random() - 0.5 ),
+        questions: questions.sort(() => Math.random() - 0.5 ),
+        // questions: action.payload.sort(() => Math.random() - 0.5 ),
         status: 'ready',
       };
     case 'dataFailed':
@@ -52,7 +59,7 @@ function reducer(state, action){
       }
     case 'newAnswer':
       const question = state.questions.at(state.index);
-      console.log('question from newAnswer', question)
+      //console.log('question from newAnswer', question)
       return {
         ...state,
         answer: action.payload,
@@ -106,33 +113,35 @@ function App() {
 
   const [{questions, answeredQuestions, status, index, answer, score, highscore, secondsRemaining}, dispatch ] = useReducer(reducer, initialState);
 
-  console.log('answer', answer);
-  console.log('score', score);
+
 
   const numQuestions = questions.length;
   const totalPoints =  questions.reduce((sum, question) => sum + question.points, 0);
 
   useEffect(()=> {
-    const fetchQuestions = async() => {
-      try{
-        const res = await fetch(`${apiEndpoint}`);
-  
-        if(!res.ok) throw new Error('Something went wrong with fetching questions :(');
-  
-        const data = await res.json();
-
-        dispatch({type: 'dataReceived', payload: data.sort(() => Math.random() - 0.5)})
-  
-        console.log('data', data)
-  
-  
-      }catch(error){
-        console.log(error.message);
-        dispatch({type: 'dataFailed'});
-      }
-    }
-    fetchQuestions()
+    dispatch({ type: 'dataReceived', payload: questions });
   },[])
+  // useEffect(()=> {
+  //   const fetchQuestions = async() => {
+  //     try{
+  //       const res = await fetch(`${apiEndpoint}`);
+  
+  //       if(!res.ok) throw new Error('Something went wrong with fetching questions :(');
+  
+  //       const data = await res.json();
+
+  //       dispatch({type: 'dataReceived', payload: data.sort(() => Math.random() - 0.5)})
+  
+  //       console.log('data', data)
+  
+  
+  //     }catch(error){
+  //       console.log(error.message);
+  //       dispatch({type: 'dataFailed'});
+  //     }
+  //   }
+  //   fetchQuestions()
+  // },[])
   return (
     <div className="app">
       <Header />

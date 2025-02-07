@@ -2,11 +2,11 @@
 import Options from './Options';
 
 const Question = ({question, dispatch, answer}) => {
-    console.log('question', question)
+   
     const {id, question: q, options, correctOption, points} = question;
   return (
     <div
-    key={id}
+     key={id}
     >
          <h4>{q}</h4> 
         <Options 
