@@ -10,7 +10,7 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "json-server --watch db.json --port $PORT --host 0.0.0.0",
+    "start": "json-server --watch src/api/data.json --port $PORT --host 0.0.0.0",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
